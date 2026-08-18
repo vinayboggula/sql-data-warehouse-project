@@ -2,64 +2,79 @@
 
 Welcome to my **Data Warehouse and Analytics Project**! 🚀
 
-This project demonstrates the end-to-end development of a modern **SQL Server Data Warehouse**, starting from raw ERP and CRM data and transforming it into clean, structured, business-ready data for analytics.
+This project demonstrates the end-to-end development of a modern **data warehouse using PostgreSQL**, from loading raw ERP and CRM data to transforming it into clean, structured, and business-ready data for analytics.
 
-The project follows the **Medallion Architecture** approach with Bronze, Silver, and Gold layers and focuses on data engineering, ETL, data cleaning, dimensional modeling, and SQL-based analytics.
+The project follows the **Medallion Architecture** with Bronze, Silver, and Gold layers and applies practical concepts in **ETL, data cleaning, data integration, dimensional modeling, data quality, and SQL analytics**.
 
 ---
 
 ## 🏗️ Data Architecture
 
-The project follows a **Medallion Architecture** consisting of three layers:
+The project follows a three-layer **Medallion Architecture**:
 
 ### 🥉 Bronze Layer — Raw Data
 
-The Bronze layer stores data directly from the source systems with minimal transformation.
+The Bronze layer stores data from the source systems in its raw form.
 
-* Source: ERP and CRM CSV files
-* Data loaded into SQL Server
-* Preserves the original source data
-* Used as the foundation for downstream transformations
+Data is sourced from:
+
+* ERP CSV files
+* CRM CSV files
+
+The main purpose of this layer is to preserve the original source data before applying transformations.
+
+**Key activities:**
+
+* Loading CSV files into PostgreSQL
+* Maintaining the original source structure
+* Creating raw staging tables
+* Performing basic ingestion checks
+
+---
 
 ### 🥈 Silver Layer — Cleaned & Transformed Data
 
-The Silver layer prepares the raw data for analytical use.
+The Silver layer prepares the raw data for analytical processing.
 
-Key transformations include:
+The transformation process includes:
 
-* Data cleaning
-* Handling missing and invalid values
-* Removing duplicates
+* Handling missing values
+* Removing duplicate records
+* Correcting data types
 * Standardizing formats
-* Data type corrections
-* Integrating ERP and CRM data
+* Cleaning inconsistent values
+* Validating data
 * Resolving data quality issues
+* Integrating ERP and CRM data
+
+The goal is to create reliable and consistent datasets for the Gold layer.
+
+---
 
 ### 🥇 Gold Layer — Business-Ready Data
 
 The Gold layer contains the final analytical data model.
 
-It uses a **Star Schema** consisting of:
+The data is organized using a **Star Schema**, consisting of:
 
-* Fact tables for measurable business events
-* Dimension tables for descriptive information
-* Relationships optimized for analytical queries
+* Fact tables
+* Dimension tables
 
-This layer is designed to make reporting and business analysis easier and more efficient.
+This layer is optimized for analytical queries and reporting.
 
 ---
 
 ## 📖 Project Overview
 
-The main goal of this project is to build a complete data warehouse that consolidates sales data from multiple source systems and transforms it into a reliable structure for analytics.
+The main objective of this project is to build a complete data warehouse in **PostgreSQL** that consolidates sales data from multiple source systems.
 
 The project covers:
 
 * 🏗️ Data warehouse architecture
 * 🔄 ETL pipelines
-* 🧹 Data cleaning and transformation
-* 🗂️ Data modeling
-* ⭐ Star schema design
+* 🧹 Data cleaning
+* 🔗 Data integration
+* ⭐ Dimensional modeling
 * 🧪 Data quality testing
 * 📊 SQL analytics
 * 📈 Business insights
@@ -68,56 +83,228 @@ The project covers:
 
 ## 🎯 Project Objectives
 
-### Data Engineering
+### 1. Data Warehouse Development
 
-Build a modern SQL Server data warehouse that integrates data from:
+Build a modern data warehouse using PostgreSQL to consolidate data from ERP and CRM systems.
 
-* **ERP system**
-* **CRM system**
-
-The warehouse focuses on the latest available dataset and does not implement historical tracking.
-
-### Data Quality
+### 2. Data Quality
 
 Identify and resolve issues such as:
 
 * Missing values
 * Duplicate records
-* Invalid data
+* Invalid values
 * Inconsistent formats
 * Incorrect data types
-* Inconsistent customer and product information
+* Invalid relationships
 
-### Data Integration
+### 3. Data Integration
 
-Combine data from multiple source systems into a unified analytical model.
+Combine data from ERP and CRM systems into a unified analytical model.
 
-### Data Modeling
+### 4. Data Modeling
 
-Design a **Star Schema** containing fact and dimension tables that support efficient analytical queries.
+Design a **Star Schema** consisting of fact and dimension tables to support efficient analytical queries.
 
-### Analytics
+### 5. Analytics
 
-Use SQL to generate insights related to:
+Use PostgreSQL to generate insights related to:
 
 * Customer behavior
 * Product performance
 * Sales trends
 * Revenue
 * Customer segmentation
-* Product and sales performance
+* Product performance
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Technologies & Tools
 
-* **SQL Server**
-* **SQL**
-* **SQL Server Management Studio (SSMS)**
-* **Draw.io**
-* **Git & GitHub**
-* **CSV**
-* **Markdown**
+### Database
+
+* **PostgreSQL**
+
+### Database Management
+
+* **pgAdmin**
+* **DBeaver** *(optional)*
+
+### Data & Analytics
+
+* SQL
+* CSV
+* Power BI *(for visualization, if applicable)*
+
+### Documentation & Design
+
+* Draw.io
+* Markdown
+
+### Version Control
+
+* Git
+* GitHub
+
+---
+
+## 🔄 ETL Process
+
+The ETL workflow follows three major stages.
+
+### 1. Extract
+
+Raw data is extracted from ERP and CRM CSV files.
+
+```text
+ERP CSV ──────┐
+              ├──> Bronze Layer
+CRM CSV ──────┘
+```
+
+### 2. Transform
+
+The raw data is cleaned and transformed in the Silver layer.
+
+```text
+Bronze Layer
+      ↓
+Data Cleaning
+      ↓
+Data Standardization
+      ↓
+Data Validation
+      ↓
+Silver Layer
+```
+
+### 3. Load
+
+The transformed data is modeled and loaded into the Gold layer.
+
+```text
+Silver Layer
+      ↓
+Data Modeling
+      ↓
+Star Schema
+      ↓
+Gold Layer
+      ↓
+Analytics & Reporting
+```
+
+---
+
+## ⭐ Data Modeling
+
+The Gold layer uses a **Star Schema** to organize data for analytical queries.
+
+### Dimension Tables
+
+Dimension tables contain descriptive information such as:
+
+* Customers
+* Products
+* Categories
+* Dates
+
+### Fact Table
+
+The fact table contains measurable business events such as:
+
+* Sales transactions
+* Quantity
+* Revenue
+* Customer transactions
+* Product transactions
+
+The Star Schema makes it easier to analyze business performance using SQL.
+
+---
+
+## 🧪 Data Quality & Testing
+
+Data quality checks are performed during the ETL process to ensure that the final data is reliable.
+
+Examples include:
+
+* Checking for NULL values
+* Detecting duplicate records
+* Validating primary keys
+* Validating foreign-key relationships
+* Checking data types
+* Validating dates
+* Checking invalid values
+* Comparing source and transformed record counts
+
+These checks help ensure the Gold layer is suitable for reporting and analytics.
+
+---
+
+## 📊 Analytics & Business Insights
+
+The final data warehouse is used to answer important business questions using PostgreSQL.
+
+### 👥 Customer Analysis
+
+Examples:
+
+* Who are the most valuable customers?
+* Which customers generate the highest revenue?
+* How many customers are active?
+* What are the customer purchasing patterns?
+
+### 📦 Product Analysis
+
+Examples:
+
+* Which products generate the most revenue?
+* Which products sell the most units?
+* Which categories perform best?
+* Which products are underperforming?
+
+### 💰 Sales Analysis
+
+Examples:
+
+* How are sales changing over time?
+* Which periods have the highest sales?
+* What is the total revenue?
+* Which products contribute most to revenue?
+* Which customers contribute most to sales?
+
+The goal is to transform raw transactional data into meaningful business insights.
+
+---
+
+## 📈 Reporting & Visualization
+
+The Gold layer can be connected to a BI tool such as **Power BI** to create interactive dashboards.
+
+Potential dashboard sections include:
+
+### Sales Overview
+
+* Total Revenue
+* Total Orders
+* Total Quantity Sold
+* Average Order Value
+* Sales Trends
+
+### Customer Overview
+
+* Total Customers
+* Top Customers
+* Customer Revenue Contribution
+* Customer Segmentation
+
+### Product Overview
+
+* Top Products
+* Product Revenue
+* Units Sold
+* Category Performance
 
 ---
 
@@ -127,8 +314,8 @@ Use SQL to generate insights related to:
 data-warehouse-project/
 │
 ├── datasets/
-│   ├── source_crm/
-│   └── source_erp/
+│   ├── crm/
+│   └── erp/
 │
 ├── docs/
 │   ├── etl.drawio
@@ -140,16 +327,24 @@ data-warehouse-project/
 │
 ├── scripts/
 │   ├── bronze/
-│   │   └── ...
+│   │   ├── ddl_bronze.sql
+│   │   └── load_bronze.sql
 │   │
 │   ├── silver/
-│   │   └── ...
+│   │   ├── ddl_silver.sql
+│   │   └── transform_silver.sql
 │   │
 │   └── gold/
-│       └── ...
+│       ├── ddl_gold.sql
+│       └── create_views.sql
+│
+├── analytics/
+│   ├── customer_analysis.sql
+│   ├── product_analysis.sql
+│   └── sales_analysis.sql
 │
 ├── tests/
-│   └── ...
+│   └── data_quality_tests.sql
 │
 ├── README.md
 ├── LICENSE
@@ -158,160 +353,89 @@ data-warehouse-project/
 
 ---
 
-## 🔄 ETL Process
-
-The ETL workflow follows three major stages:
-
-### 1. Extract
-
-Data is extracted from the provided ERP and CRM CSV files.
-
-### 2. Transform
-
-The raw data is cleaned and transformed through the Silver layer.
-
-This includes:
-
-* Cleaning inconsistent data
-* Standardizing values
-* Converting data types
-* Removing duplicates
-* Validating relationships
-* Integrating related datasets
-
-### 3. Load
-
-The transformed data is loaded into the Gold layer and organized into analytical fact and dimension tables.
-
----
-
-## ⭐ Data Modeling
-
-The Gold layer follows a **Star Schema** to make analytical queries simpler and more efficient.
-
-### Dimension Tables
-
-Dimension tables provide descriptive information such as:
-
-* Customers
-* Products
-* Categories
-* Dates
-
-### Fact Table
-
-The fact table contains measurable business information such as:
-
-* Sales
-* Quantity
-* Revenue
-* Product transactions
-* Customer transactions
-
-The relationships between fact and dimension tables allow business questions to be answered efficiently using SQL.
-
----
-
-## 🧪 Data Quality & Testing
-
-Data quality checks are performed throughout the transformation process.
-
-Examples include:
-
-* Checking for NULL values
-* Identifying duplicate records
-* Validating primary keys
-* Checking foreign-key relationships
-* Validating data types
-* Checking invalid dates
-* Comparing source and transformed record counts
-
-These checks help ensure that the final Gold layer contains reliable data for analytics.
-
----
-
-## 📊 Analytics & Business Insights
-
-After building the data warehouse, SQL queries are used to analyze the business data.
-
-### Customer Analysis
-
-Examples:
-
-* Who are the most valuable customers?
-* How many customers are active?
-* Which customers generate the highest revenue?
-* What are the customer purchasing patterns?
-
-### Product Analysis
-
-Examples:
-
-* Which products generate the most revenue?
-* Which products sell the most units?
-* Which categories perform best?
-* Which products have declining sales?
-
-### Sales Analysis
-
-Examples:
-
-* How are sales changing over time?
-* What are the highest-performing periods?
-* What is the total revenue?
-* Which products and customers contribute most to revenue?
-
-The objective is to transform raw transactional data into meaningful business insights.
-
----
-
 ## 📚 Documentation
 
-The `docs/` directory contains documentation related to the project, including:
+The `docs/` directory contains documentation related to the project.
 
-* Data architecture
-* Data flow
-* ETL process
-* Data models
-* Data catalog
-* Naming conventions
+It includes:
 
-These documents explain how the data moves through the warehouse and how the final analytical model is structured.
+* **Data Architecture** — Overall warehouse architecture
+* **Data Flow** — Movement of data through Bronze, Silver, and Gold layers
+* **ETL Documentation** — Extraction, transformation, and loading process
+* **Data Models** — Star Schema and table relationships
+* **Data Catalog** — Dataset and column descriptions
+* **Naming Conventions** — Standards used throughout the project
 
 ---
 
-## 🚀 What I Learned
+## 🚀 Key Learning Outcomes
 
 Through this project, I gained practical experience in:
 
 * Designing a data warehouse
-* Understanding Bronze, Silver, and Gold architecture
-* Building ETL workflows using SQL
-* Cleaning and transforming raw datasets
-* Working with SQL Server
+* Implementing Medallion Architecture
+* Working with PostgreSQL
+* Building ETL pipelines
+* Loading CSV data into PostgreSQL
+* Cleaning and transforming raw data
+* Integrating multiple source systems
 * Designing Star Schemas
 * Creating fact and dimension tables
-* Writing analytical SQL queries
+* Writing advanced SQL queries
 * Performing data quality checks
+* Analyzing customer, product, and sales data
+* Creating business-focused analytical queries
 * Documenting data architecture and data models
-* Extracting business insights from structured data
 
 ---
 
-## 👨‍💻 About This Project
+## 💡 Project Workflow
 
-This project was developed as part of my journey in **Data Analytics, SQL, and Data Engineering**.
+The complete workflow can be summarized as:
 
-It helped me understand how raw business data can be transformed into a structured data warehouse and ultimately used to answer real-world business questions.
+```text
+        ERP Data                CRM Data
+           │                       │
+           └───────────┬───────────┘
+                       ↓
+                🥉 Bronze Layer
+                 Raw Data
+                       ↓
+                🥈 Silver Layer
+             Cleaned & Transformed
+                       ↓
+                 🥇 Gold Layer
+                  Star Schema
+                       ↓
+             ┌─────────┴─────────┐
+             ↓                   ↓
+       SQL Analytics        Power BI
+             │                   │
+             └─────────┬─────────┘
+                       ↓
+               Business Insights
+```
 
-### Key Areas
+---
 
-**SQL • Data Warehousing • ETL • Data Modeling • Data Analytics • SQL Server**
+## 🎯 Project Focus
+
+This project focuses on applying practical concepts in:
+
+**PostgreSQL • SQL • Data Warehousing • ETL • Data Cleaning • Data Modeling • Star Schema • Data Analytics • Business Intelligence**
+
+---
+
+## 👨‍💻 About Me
+
+I am a **Computer Science and Engineering graduate** interested in **Data Analytics, Data Science, SQL, and Data Engineering**.
+
+This project is part of my portfolio to demonstrate my ability to work with real-world datasets, build analytical data models, write SQL queries, and transform raw data into meaningful business insights.
 
 ---
 
 ## 📄 License
 
-This project is available under the **MIT License**.
+This project is licensed under the **MIT License**.
 
-You are free to use, modify, and distribute the project according to the terms of the license.
+You are free to use, modify, and distribute this project according to the terms of the license.
